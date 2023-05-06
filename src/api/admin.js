@@ -15,7 +15,19 @@ export const getProduct = async (id) => {
   return await axiosClient.get(`${ADMIN_PATH.PRODUCT}/${id}`);
 };
 export const addNewProduct = async (body) => {
-  return await axiosClient.post(ADMIN_PATH.PRODUCT, body);
+  console.log(body);
+  const newData = new FormData();
+  Object.keys(body).forEach((key) => {
+    if (key === "photos") {
+      for (let i = 0; i < body.photos.length; i++) {
+        console.log(key, body[key][i]);
+        newData.append(key, body[key][i]);
+      }
+    } else {
+      newData.append(key, body[key]);
+    }
+  });
+  return await axiosClient.post(ADMIN_PATH.PRODUCT, newData);
 };
 export const updateProduct = async (id, data) => {
   return await axiosClient.patch(`${ADMIN_PATH.PRODUCT}/${id}`, data);

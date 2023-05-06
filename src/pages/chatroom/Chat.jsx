@@ -14,17 +14,17 @@ const Chat = () => {
       authorization: "Bearer " + localStorage.getItem("token"),
     };
 
-    const getChatRooms = () => {
-      fetch("https://tmdt.vercel.app/admin/chatrooms")
-        .then((res) => res.json())
-        .then((data) => {
-          setChatrooms(data);
-        })
-        .catch((err) => console.log(err));
-    };
+    // const getChatRooms = () => {
+    //   fetch("https://tmdt.vercel.app/admin/chatrooms")
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       setChatrooms(data);
+    //     })
+    //     .catch((err) => console.log(err));
+    // };
 
-    getChatRooms();
-    openSocket("http://localhost:5000");
+    // getChatRooms();
+    // openSocket("http://localhost:5000");
   }, []);
 
   const handleMessageChat = (roomId) => {

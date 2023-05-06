@@ -1,7 +1,10 @@
-export const Category = [
-  {
-    id: 1,
-    name: "Iphone",
-    key: "iphone",
-  },
-];
+export const Category = {
+  iphone: "Iphone",
+  ipad: "Ipad",
+  macbook: "Macbook",
+  watch: "Watch",
+  airpod: "Airpod",
+  mouse: "Mouse",
+  keyboard: "Keyboard",
+  other: "Other",
+};

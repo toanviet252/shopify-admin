@@ -1,9 +1,11 @@
 import "./NewProduct.css";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
-
+import { Category } from "../../constants/category";
+import { handlerError } from "../../utils/notification";
+import { addNewProduct } from "../../api/admin";
 const NewProduct = () => {
   const navigate = useNavigate();
   const [prodName, setProdName] = useState("");
@@ -12,8 +14,18 @@ const NewProduct = () => {
   const [longDesc, setLongDesc] = useState("");
   const [price, setPrice] = useState("");
   const [images, setImages] = useState([]);
+  const categoryOptions = useMemo(() => {
+    const rs = [];
+    for (const [key, value] of Object.entries(Category)) {
+      rs.push({
+        label: value,
+        value: key,
+      });
+    }
+    return rs;
+  }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {};
     const formData = new FormData(e.target);
@@ -26,7 +38,14 @@ const NewProduct = () => {
         data[key] = value;
       }
     }
-    console.log(data);
+    
+
+    try {
+      const res = await addNewProduct(data);
+      console.log(res);
+    } catch (err) {
+      handlerError(err);
+    }
   };
 
   return (
@@ -49,13 +68,15 @@ const NewProduct = () => {
             </div>
             <div className="form-group col">
               <label htmlFor="category">Category</label>
-              <input
-                type="text"
-                name="category"
-                placeholder="Enter Category"
-                onChange={(e) => setCategory(e.target.value)}
-                className="form-control"
-              />
+              <select className="form-control" name="category">
+                {categoryOptions.map((item, index) => {
+                  return (
+                    <option value={item.value} key={index}>
+                      {item.label}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
             <div className="form-group col">
               <label htmlFor="price">Price</label>
@@ -68,10 +89,20 @@ const NewProduct = () => {
               />
             </div>
             <div className="form-group col">
-              <label htmlFor="shortDescription">Short Description</label>
+              <label htmlFor="count">Avalible products</label>
+              <input
+                type="number"
+                min={0}
+                name="count"
+                placeholder="Quantity of products in store"
+                className="form-control"
+              />
+            </div>
+            <div className="form-group col">
+              <label htmlFor="short_desc">Short Description</label>
               <textarea
                 type="text"
-                name="shortDescription"
+                name="short_desc"
                 placeholder="Enter Short Description"
                 rows={5}
                 onChange={(e) => setShortDesc(e.target.value)}
@@ -79,10 +110,10 @@ const NewProduct = () => {
               ></textarea>
             </div>
             <div className="form-group col">
-              <label htmlFor="longDescription">Long Description</label>
+              <label htmlFor="long_desc">Long Description</label>
               <textarea
                 type="text"
-                name="longDescription"
+                name="long_desc"
                 placeholder="Enter Long Description"
                 rows={10}
                 onChange={(e) => setLongDesc(e.target.value)}
