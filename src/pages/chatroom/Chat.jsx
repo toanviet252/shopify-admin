@@ -10,10 +10,6 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const headers = {
-      authorization: "Bearer " + localStorage.getItem("token"),
-    };
-
     // const getChatRooms = () => {
     //   fetch("https://tmdt.vercel.app/admin/chatrooms")
     //     .then((res) => res.json())
@@ -24,7 +20,17 @@ const Chat = () => {
     // };
 
     // getChatRooms();
-    // openSocket("http://localhost:5000");
+    const socket = openSocket("http://localhost:5000");
+    socket.on("posts", (data) => {
+      console.log(data);
+    });
+    socket.on("send_message", (data) => {
+      console.log(data);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const handleMessageChat = (roomId) => {

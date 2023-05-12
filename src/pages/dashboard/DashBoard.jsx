@@ -34,7 +34,7 @@ const DashBoard = () => {
     setOpen(true);
   };
   return (
-    <div>
+    <>
       <Header />
       <DashboardDetail open={open} setOpen={setOpen} orderId={orderId} />
       <div className="dashboard-container">
@@ -129,7 +129,7 @@ const DashBoard = () => {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

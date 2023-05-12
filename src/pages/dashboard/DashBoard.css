@@ -47,3 +47,7 @@
   font-size: 15px;
   margin-right: 10px;
 }
+.product-container {
+  margin: 1rem;
+  overflow: scroll;
+}

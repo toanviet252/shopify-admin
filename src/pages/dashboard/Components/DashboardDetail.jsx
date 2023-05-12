@@ -8,7 +8,7 @@ import Spin from "../../../components/Suspense/BoostrapSpinner/Spin";
 
 export const Products = ({ productData }) => {
   return (
-    <Table>
+    <Table className="w-auto">
       <thead>
         <tr>
           <th>Name</th>
@@ -115,9 +115,7 @@ const DashboardDetail = ({ orderId, open, setOpen }) => {
                 <Products productData={data.products} />
               </div>
               <hr />
-              <h4>
-                Total: {formatMoney(data.totalPrice)}
-              </h4>
+              <h4>Total: {formatMoney(data.totalPrice)} VNĐ</h4>
             </ModalBody>
           )}
         </>

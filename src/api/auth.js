@@ -11,3 +11,7 @@ export const signin = async (data) => {
 export const getMe = async () => {
   return await axiosClient.get(ADMIN_PATH.AUTH.ME);
 };
+
+export const signOut = async () => {
+  return await axiosClient.post(ADMIN_PATH.AUTH.SIGN_OUT);
+};

@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
-import { handlerError } from "../../utils/notification";
+import { handlerError, notification } from "../../utils/notification";
 import { deleteProduct, getAllProducts } from "../../api/admin";
 import Spin from "../../components/Suspense/BoostrapSpinner/Spin";
 import { formatMoney } from "../../utils/convertMoneyLocale";
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
 import { Modal, ModalFooter, ModalBody } from "reactstrap";
+import fallbackImg from "../../assets/default-fallback-image.png";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -49,14 +50,16 @@ const Products = () => {
       const res = await deleteProduct(productId);
       console.log(res);
       fetchAllProducts();
+      notification("success", res?.message);
+      setOpen(false);
     } catch (err) {
       handlerError(err);
     }
   };
 
-  const handleEditHotel = (id) => {
+  const handleEditHotel = (id, data) => {
     const prodId = id;
-    navigate(`/edit-product/${prodId}`, { state: { prodId } });
+    navigate(`/edit-product/${prodId}`, { state: data });
   };
 
   return (
@@ -111,14 +114,27 @@ const Products = () => {
                         <td>{product.name}</td>
                         <td>{formatMoney(product.price)}</td>
                         <td>
-                          <img src={product.photos[0]} width="100" />
+                          <img
+                            src={product.photos[0]}
+                            width="100"
+                            onError={(e) => {
+                              if (
+                                e.target.src !==
+                                `http://localhost:5000/${product.photos[0]}`
+                              ) {
+                                e.target.src = fallbackImg;
+                              }
+                            }}
+                          />
                         </td>
                         <td>{product.category}</td>
                         <td>
                           <div className="action-container">
                             <button
                               className="action-btn"
-                              onClick={() => handleEditHotel(product._id)}
+                              onClick={() =>
+                                handleEditHotel(product._id, product)
+                              }
                             >
                               <AiOutlineEdit />
                             </button>
