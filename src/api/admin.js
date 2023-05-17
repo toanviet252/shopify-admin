@@ -26,3 +26,14 @@ export const updateProduct = async (id, data) => {
 export const deleteProduct = async (id) => {
   return await axiosClient.delete(`${ADMIN_PATH.PRODUCT}/${id}`);
 };
+
+// chat
+export const getAllChatRooms = async () => {
+  return await axiosClient.get(ADMIN_PATH.CHAT);
+};
+export const getChatroom = async (roomId) => {
+  return await axiosClient.get(`${ADMIN_PATH.CHAT}/${roomId}`);
+};
+export const postMessage = async (data) => {
+  return await axiosClient.post("/chatrooms/addMessage", data);
+};

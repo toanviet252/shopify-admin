@@ -48,7 +48,6 @@ const Products = () => {
   const onDeleteProduct = async () => {
     try {
       const res = await deleteProduct(productId);
-      console.log(res);
       fetchAllProducts();
       notification("success", res?.message);
       setOpen(false);
