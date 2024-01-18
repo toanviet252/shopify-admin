@@ -10,6 +10,7 @@ export const formatMoney = (data) => {
     style: "currency",
     currency: "VND",
   }).format(santizeData);
+
   return formatValue.replaceAll(".", ",").slice(0, -2);
 };
 

@@ -7,7 +7,7 @@ import { Category } from "../../constants/category";
 import { handlerError, notification } from "../../utils/notification";
 import { addNewProduct, updateProduct } from "../../api/admin";
 import Spinner from "../../components/Suspense/Loading";
-import { formatMoney, revertMoney } from "../../utils/convertMoneyLocale";
+import { formatMoney } from "../../utils/convertMoneyLocale";
 
 const NewProduct = ({ edit }) => {
   const navigate = useNavigate();
@@ -26,9 +26,9 @@ const NewProduct = ({ edit }) => {
   const [previewImgs, setPreviewImgs] = useState([]);
   const [confirmLoading, setConfirmLoading] = useState(false);
 
-  const revertPrice = useMemo(() => {
-    return revertMoney(price);
-  }, [price]);
+  // const revertPrice = useMemo(() => {
+  //   return revertMoney(price);
+  // }, [price]);
 
   const categoryOptions = useMemo(() => {
     const rs = [];
@@ -140,7 +140,7 @@ const NewProduct = ({ edit }) => {
                 type="text"
               />
 
-              <p style={{ margin: 0 }}>{revertPrice}</p>
+              {/* <p style={{ margin: 0 }}>{revertPrice}</p> */}
             </div>
             <div className="form-group col">
               <label htmlFor="count">Avalible products</label>

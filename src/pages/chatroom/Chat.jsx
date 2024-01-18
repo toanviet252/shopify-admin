@@ -20,7 +20,7 @@ const Chat = () => {
   const fetchAllChatroom = async () => {
     try {
       const res = await getAllChatRooms();
-
+      console.log(res.data);
       setChatrooms(res.data);
     } catch (err) {
       handlerError(err);
@@ -48,10 +48,12 @@ const Chat = () => {
     socket.on("posts", (data) => {
       // console.log(data);
       if (data.action === "post_mesage") {
-        fetchAllChatroom();
-
-        // cần sửa lại
-        setMessages((pre) => [...pre, data.newMess]);
+        if (roomId === data.newMess.roomId) {
+          fetchChatroom(data.newMess.roomId, false);
+        } else {
+          setRoomId(data.newMess.roomId);
+          fetchAllChatroom();
+        }
       }
       if (data.action === "delete_chatroom") {
         fetchAllChatroom();

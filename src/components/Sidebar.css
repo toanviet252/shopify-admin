@@ -8,9 +8,10 @@
   height: calc(100vh - 50px);
   position: sticky;
   left: 0;
-  top: 50px;
+  /* top: 50px; */
   max-width: 300px;
   width: 25%;
+  z-index: 900;
 }
 
 .nav-aside p {
@@ -40,4 +41,34 @@
 .active {
   background-color: rgb(136, 127, 255);
   color: white;
+}
+.toogle-btn {
+  position: absolute;
+  top: 0;
+  background: transparent;
+  border: none;
+
+  z-index: 1000;
+  display: none;
+}
+.toogle-btn:hover {
+  color: rgb(136, 127, 255);
+}
+.toogle-btn i {
+  font-size: 2rem;
+}
+@media screen and (max-width: 890px) {
+  /* STYLES HERE */
+  .sidebar {
+    left: -100%;
+    position: absolute;
+    top: 50px;
+    transition: all 0.25s ease-in-out;
+  }
+  .active-sidebar {
+    left: 0;
+  }
+  .toogle-btn {
+    display: block;
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Sidebar.css";
 
@@ -7,9 +7,15 @@ import { AppContext } from "../context/AppContext";
 const Sidebar = () => {
   const { loggedOut } = useContext(AppContext);
   const { pathname } = useLocation();
+
+  const [toogle, setToogle] = useState(false);
+  const toogleNavbar = () => setToogle(!toogle);
   return (
     <>
-      <aside className="sidebar">
+      <button onClick={toogleNavbar} type="button" className="toogle-btn">
+        <i className="fa fa-bars" aria-hidden="true"></i>
+      </button>
+      <aside className={`sidebar ${toogle ? "active-sidebar" : ""}`}>
         <ul className="nav-aside">
           <p className="title">MAIN</p>
           <li>

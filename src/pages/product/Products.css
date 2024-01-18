@@ -1,5 +1,9 @@
 .products-container {
   display: flex;
+  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: auto;
+  /* overflow: scroll; */
 }
 
 .search {

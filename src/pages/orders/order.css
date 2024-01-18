@@ -1,6 +1,8 @@
 .order-container {
   display: flex;
   gap: 1rem;
+  /* width: 100vw; */
+  overflow: scroll;
 }
 .orders {
   margin: 2rem 0;
