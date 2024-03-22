@@ -11,3 +11,5 @@ export const ADMIN_PATH = {
   },
   ORDER: "admin/orders",
 };
+
+export const BASE_URL = "https://mern-shopify.onrender.com";

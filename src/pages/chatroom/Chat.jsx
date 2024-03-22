@@ -9,6 +9,7 @@ import { getAllChatRooms, getChatroom, postMessage } from "../../api/admin";
 import Spin from "../../components/Suspense/BoostrapSpinner/Spin";
 import { useCallback } from "react";
 import Messages from "./Components/Message";
+import { BASE_URL } from "../../constants/path";
 
 const Chat = () => {
   const [chatrooms, setChatrooms] = useState([]);
@@ -44,7 +45,7 @@ const Chat = () => {
   );
   useEffect(() => {
     fetchAllChatroom();
-    const socket = openSocket("http://localhost:5000");
+    const socket = openSocket(BASE_URL);
     socket.on("posts", (data) => {
       // console.log(data);
       if (data.action === "post_mesage") {

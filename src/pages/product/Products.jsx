@@ -11,6 +11,7 @@ import { BsTrash } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
 import { Modal, ModalFooter, ModalBody } from "reactstrap";
 import fallbackImg from "../../assets/default-fallback-image.png";
+import { BASE_URL } from "../../constants/path";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -119,7 +120,7 @@ const Products = () => {
                             onError={(e) => {
                               if (
                                 e.target.src !==
-                                `http://localhost:5000/${product.photos[0]}`
+                                `${BASE_URL}/${product.photos[0]}`
                               ) {
                                 e.target.src = fallbackImg;
                               }

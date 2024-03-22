@@ -1,10 +1,11 @@
 // api/axiosClient.js
 import axios from "axios";
 import { clearToken, getToken } from "../utils/localStorage";
+import { BASE_URL } from "../constants/path";
 
 // Please have a look at here `https://github.com/axios/axios#requestconfig` for the full list of configs
 const axiosClient = axios.create({
-  baseURL: "https://mern-shopify.onrender.com",
+  baseURL: BASE_URL,
 });
 axiosClient.interceptors.request.use(async (config) => {
   // Handle token here ...
