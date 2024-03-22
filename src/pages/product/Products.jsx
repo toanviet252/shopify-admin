@@ -18,7 +18,7 @@ const Products = () => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [productId, setProductId] = useState(undefined);
-  const [isEdit, setIsEdit] = useState(false);
+  // const [isEdit, setIsEdit] = useState(false);
   const navigate = useNavigate();
   const toggle = () => setOpen(!open);
   const fetchAllProducts = async (params) => {
